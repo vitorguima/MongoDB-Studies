@@ -1,0 +1,33 @@
+use('praticas1');
+
+// Ex. 1
+db.bios.find({_id: 8});
+
+// Ex. 2
+db.bios.find({_id: 8}, { name: 1, _id: 1 });
+
+// Ex. 3
+db.bios.find({_id: 8}, { name: 1, birth: 1, _id: 0 });
+
+// Ex. 4
+db.bios.find({ "name.first": "John"  }).pretty();
+
+// Ex. 5
+db.bios.find().limit(3);
+
+// Ex. 6
+db.bios.find().limit(3).skip(5);
+
+use('library');
+
+// Ex. 7
+db.books.count();
+
+// Ex. 8
+db.books.find({ status: "PUBLISH"  }).count();
+
+// Ex. 9
+db.books.find({}, { title: 1, isbn: 1, pageCount: 1 , _id: 0 }).limit(3);
+
+// Ex. 10
+db.books.find({ status: "MEAP" }, { title: 1, authors: 1, status: 1 }).limit(10);
