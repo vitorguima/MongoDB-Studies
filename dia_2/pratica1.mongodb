@@ -1,0 +1,17 @@
+// Prática conteúdo diário 1 - momento estudo
+use ('business');
+
+// Ex. 1
+db.restaurants.find({ borough: { $in: ["Queens", "Staten Island", "Bronx"] } }).count();
+
+// Ex. 2
+db.restaurants.find({ cuisine: { $ne: "American" } }).count();
+
+// Ex. 3
+db.restaurants.find({ rating: { $gte: 8 } }).count();
+
+// Ex. 4
+db.restaurants.find({ rating: { $lt: 4 } }).count();
+
+// Ex. 5
+db.restaurants.find({ rating: { $nin: [5, 6, 7] } }).count();

@@ -1,0 +1,12 @@
+// Prática conteúdo diário 4 - momento estudo
+use ('business');
+
+// Ex. 1
+db.restaurants.deleteOne({ cuisine: { $in: ["Ice Cream", "Gelato", "Yogurt", "Ices" ] } });
+
+// Ex. 2
+db.restaurants.find({ cuisine: { $eq: "American" } }).count();
+
+db.restaurants.deleteMany({ cuisine: { $eq: "American" } });
+
+db.restaurants.find({ cuisine: { $eq: "American" } }).count();
