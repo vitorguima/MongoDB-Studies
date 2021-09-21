@@ -1,0 +1,65 @@
+use('agg_example');
+
+// Ex. 1
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      let: { user_name: "$name" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$from", "$$user_name"],
+            }
+          }
+        }
+      ],
+      as: "transactions"
+    },
+  },
+]);
+
+// Ex. 2
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      let: { user_name: "$name" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$from", "$$user_name"],
+            }
+          }
+        }
+      ],
+      as: "transactions"
+    },
+  },
+  { $sort: { state: 1 } },
+  { $limit: 4 }
+]);
+
+// Ex. 3
+db.clients.aggregate([
+  { $match: { State: { $eq: "Florida" } } },
+  {
+    $lookup: {
+      from: "transactions",
+      let: { user_name: "$name" },
+      pipeline: [
+        {
+          $match: {
+            $expr: {
+              $eq: ["$to", "$$user_name"],
+            }
+          }
+        }
+      ],
+      as: "transactions"
+    },
+  },
+]);
+
