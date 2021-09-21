@@ -1,0 +1,42 @@
+// Exercício fixacao pt.2
+use('agg_example');
+
+db.transactions.aggregate([
+  {
+    $group : {
+      _id : "$bank",
+    }
+  }
+]);
+
+db.transactions.aggregate([
+  {
+    $group : {
+      _id : "$bank",
+      transactionsValue: { $sum: "$value" },
+      totalTransactions: { $sum: 1 }
+    }
+  }
+]);
+
+
+db.transactions.aggregate([
+  {
+    $group : {
+      _id : "$bank",
+      totalTransactions: { $sum: "$value" }
+    }
+  }
+]);
+
+db.transactions.aggregate([
+  {
+    $group : {
+      _id : "$bank",
+      totalTransactions: { $sum: "$value" }
+    }
+  },
+  { $match: { "totalTransactions": { $gt: 1000 } } }
+]);
+
+

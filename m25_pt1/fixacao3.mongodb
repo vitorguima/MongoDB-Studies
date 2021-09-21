@@ -1,0 +1,38 @@
+// fixacao 3
+use('agg_example');
+
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      localField: "name",
+      foreignField: "from",
+      as: "transactions_done"
+    }
+  },
+]);
+
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      localField: "name",
+      foreignField: "from",
+      as: "transactions_done"
+    }
+  },
+  { $limit: 4 },
+]);
+
+db.clients.aggregate([
+  {
+    $lookup: {
+      from: "transactions",
+      localField: "name",
+      foreignField: "to",
+      as: "transactions_done"
+    }
+  },
+  { $match: { State: "Florida" } },
+  { $limit: 4 },
+]);

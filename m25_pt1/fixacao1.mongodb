@@ -1,0 +1,22 @@
+// Exercício fixacao pt.1
+use('agg_example');
+
+db.transactions.aggregate([
+ { $match: { from: "Dave America" } }
+]);
+
+db.transactions.aggregate([
+ {
+   $match: {
+     $or: [
+      { to: "Lisa Simpson" },
+      { value: { $gt: 700, $lt: 6000 } }
+     ]
+   }
+ },
+]);
+
+db.transactions.aggregate([
+  { $match: { value: { $gt: 1000 } } },
+  { $limit: 3 }
+]);
